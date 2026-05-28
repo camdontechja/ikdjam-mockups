@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mockup Review | IKD Jamaica</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <main class="viewer-shell">
+    <section class="viewer-main" aria-label="Selected mockup">
+      <header class="viewer-topbar">
+        <a class="button" href="index.html">Gallery</a>
+        <div class="viewer-actions">
+          <select id="mockupSelector" aria-label="Choose mockup"></select>
+          <a class="button" id="openDirect" href="#" target="_blank" rel="noopener">Open full page</a>
+        </div>
+      </header>
+      <div class="viewer-frame-wrap">
+        <iframe id="mockupFrame" title="Selected mockup"></iframe>
+      </div>
+    </section>
+
+    <aside class="comments-panel" aria-label="Mockup comments">
+      <header class="comments-header">
+        <span class="viewer-tag" id="viewerTag">Mockup</span>
+        <h1 id="viewerTitle">Mockup</h1>
+        <p class="viewer-copy" id="viewerDescription"></p>
+      </header>
+
+      <form class="comment-form" id="commentForm">
+        <strong id="commentCount">0 comments</strong>
+        <label>
+          Name
+          <input id="commentName" type="text" autocomplete="name" placeholder="Reviewer">
+        </label>
+        <label>
+          Comment
+          <textarea id="commentMessage" required placeholder="Add revision notes or approval feedback"></textarea>
+        </label>
+        <button class="button" type="submit">Add comment</button>
+      </form>
+
+      <section class="comment-list" id="commentList" aria-live="polite"></section>
+    </aside>
+  </main>
+
+  <script src="assets/js/mockups.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

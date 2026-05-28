@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IKD Jamaica — IKD World Theme</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap');
+:root {
+  --white:#ffffff;--off:#f8f8f8;--lgrey:#efefef;--mgrey:#d4d4d4;
+  --muted:#787878;--subtle:#aaaaaa;--black:#111111;--ink:#000000;
+  --red:#CC0000;--rdark:#A00000;--rbg:#fff0f0;--rborder:#f5c0c0;
+  --gold:#D4A800;--gbg:#fffae8;--gborder:#e8d060;
+  --green:#006B3F;--grbg:#e8f5ee;--grborder:#9dd4b8;
+  --bg:var(--white);--bgalt:var(--off);--bgtint:var(--lgrey);
+  --border:rgba(0,0,0,0.09);--bordermd:rgba(0,0,0,0.16);--borderstr:rgba(0,0,0,0.28);
+  --r:8px;--rl:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--white);color:var(--black);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.6;min-height:100vh;}
+.shell{display:flex;flex-direction:column;min-height:100vh;}
+nav{background:var(--ink);padding:0 36px;display:flex;align-items:center;height:58px;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--red);}
+.nlogo{display:flex;align-items:center;gap:12px;margin-right:40px;cursor:pointer;}
+.nlogo-k{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;letter-spacing:1px;line-height:1;}
+.nlogo-sub{font-family:'DM Mono',monospace;font-size:8px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:2px;}
+.nsep{width:1px;height:22px;background:rgba(255,255,255,0.2);}
+.ntext{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:3px;color:#fff;line-height:1;}
+.nsub2{font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);letter-spacing:2px;}
+.nflag{display:flex;gap:3px;align-items:center;margin-right:12px;opacity:0.65;}
+.nfs{width:3px;height:22px;border-radius:1px;}
+.nlinks{display:flex;gap:2px;flex:1;}
+.nlink{padding:6px 13px;font-size:11px;color:rgba(255,255,255,0.6);cursor:pointer;border-radius:4px;transition:all .15s;white-space:nowrap;}
+.nlink:hover{color:#fff;background:rgba(255,255,255,0.08);}
+.nlink.active{color:#fff;}
+.ncta{background:var(--red);color:#fff;padding:7px 18px;border-radius:4px;font-size:11px;font-weight:500;cursor:pointer;border:none;letter-spacing:.5px;text-transform:uppercase;transition:background .15s;font-family:'DM Sans',sans-serif;}
+.ncta:hover{background:var(--rdark);}
+.jmbar{display:flex;height:4px;width:100%;}
+.jmbs{flex:1;}
+.page{display:none;}.page.active{display:block;}
+.hero{background:var(--ink);min-height:500px;position:relative;overflow:hidden;display:flex;align-items:flex-end;padding:56px 48px;}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:48px 48px;}
+.hstripes{position:absolute;top:0;right:0;width:8px;height:100%;display:flex;flex-direction:column;}
+.hs{flex:1;}
+.hkanji{position:absolute;right:48px;top:50%;transform:translateY(-50%);font-family:'Bebas Neue',sans-serif;font-size:280px;line-height:1;color:rgba(255,255,255,.03);pointer-events:none;user-select:none;letter-spacing:-10px;}
+.hline{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--red);}
+.hcontent{position:relative;max-width:600px;}
+.heyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.5);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+.heddot{width:6px;height:6px;border-radius:50%;background:var(--red);}
+.htitle{font-family:'Bebas Neue',sans-serif;font-size:88px;line-height:.88;letter-spacing:3px;margin-bottom:22px;color:#fff;}
+.htitle .tr{color:var(--red);}.htitle .tg{color:var(--gold);}
+.hbody{font-size:13px;color:rgba(255,255,255,.55);line-height:1.9;max-width:420px;margin-bottom:28px;}
+.hjmbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:5px 12px;margin-bottom:16px;}
+.hjmbs{width:3px;height:14px;border-radius:1px;}
+.hjmbadge span{font-family:'DM Mono',monospace;font-size:9px;color:rgba(255,255,255,.5);letter-spacing:1.5px;text-transform:uppercase;}
+.hbtns{display:flex;gap:10px;}
+.btn-r{background:var(--red);color:#fff;border:none;padding:11px 24px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;transition:background .15s;font-family:'DM Sans',sans-serif;}
+.btn-r:hover{background:var(--rdark);}
+.btn-gw{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.25);padding:11px 24px;border-radius:4px;font-size:12px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.btn-gw:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.06);}
+.btn-blk{background:var(--black);color:#fff;border:none;padding:11px 24px;border-radius:4px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .15s;}
+.btn-blk:hover{background:#333;}
+.btn-out{background:transparent;color:var(--black);border:1px solid var(--bordermd);padding:11px 24px;border-radius:4px;font-size:12px;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif;}
+.btn-out:hover{border-color:var(--borderstr);background:var(--bgalt);}
+.btn-sm{padding:7px 16px;font-size:11px;}
+.statsbar{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+.stat{padding:20px 28px;border-right:1px solid var(--border);background:var(--white);}
+.stat:last-child{border-right:none;}
+.stn{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--ink);line-height:1;}
+.stn.jg{color:var(--gold);}
+.stl{font-size:11px;color:var(--muted);margin-top:2px;}
+.sec{padding:52px 48px;background:var(--white);}
+.sec-alt{background:var(--off);}
+.sech{margin-bottom:28px;}
+.seye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.eyline{width:20px;height:1px;}
+.ey-r{color:var(--red);}.ey-g{color:var(--gold);}.ey-gr{color:var(--green);}.ey-b{color:var(--black);}
+.sett{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:1.5px;color:var(--ink);}
+.cards{display:grid;gap:12px;}
+.c3{grid-template-columns:repeat(3,1fr);}.c2{grid-template-columns:repeat(2,1fr);}
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;transition:border-color .2s,box-shadow .2s,transform .2s;cursor:pointer;}
+.card:hover{border-color:var(--bordermd);box-shadow:0 4px 18px rgba(0,0,0,.07);transform:translateY(-2px);}
+.caccent{height:3px;}
+.cbody{padding:16px;}
+.cbadge{display:inline-block;font-size:10px;font-weight:500;padding:3px 9px;border-radius:3px;margin-bottom:10px;letter-spacing:.3px;}
+.br{background:var(--rbg);color:var(--red);border:1px solid var(--rborder);}
+.bg{background:var(--gbg);color:var(--gold);border:1px solid var(--gborder);}
+.bgr{background:var(--grbg);color:var(--green);border:1px solid var(--grborder);}
+.bk{background:var(--ink);color:#fff;}
+.bgy{background:var(--lgrey);color:var(--muted);border:1px solid var(--mgrey);}
+.ctitle{font-size:13px;font-weight:500;color:var(--black);margin-bottom:4px;line-height:1.4;}
+.cmeta{font-size:11px;color:var(--muted);line-height:1.6;}
+.cfoot{padding:10px 16px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.sto{font-size:10px;color:var(--green);font-weight:500;}
+.stp{font-size:10px;color:var(--red);}
+.stt{font-size:10px;color:var(--muted);}
+.clink{font-size:10px;color:var(--red);cursor:pointer;font-weight:500;}
+.fevent{background:var(--white);border:1px solid var(--border);border-top:4px solid var(--red);border-radius:var(--rl);padding:28px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;margin-bottom:24px;box-shadow:0 2px 12px rgba(0,0,0,.05);}
+.feye{font-family:'DM Mono',monospace;font-size:10px;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.fett{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;color:var(--ink);margin-bottom:8px;}
+.femeta{font-size:12px;color:var(--muted);line-height:1.8;margin-bottom:14px;}
+.femeta strong{color:var(--black);font-weight:500;}
+.fetags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.fetag{font-size:10px;padding:3px 9px;border-radius:3px;border:1px solid var(--bordermd);color:var(--muted);background:var(--off);letter-spacing:.2px;}
+.febtns{display:flex;gap:10px;}
+.cdown{background:var(--ink);border-radius:var(--rl);padding:22px 26px;text-align:center;min-width:152px;}
+.cdtop{font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:2px;margin-bottom:12px;}
+.cdnums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
+.cdu{text-align:center;}
+.cdn{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--red);line-height:1;}
+.cdul{font-size:9px;color:#555;letter-spacing:1px;}
+.cddiv{border-top:1px solid #222;padding-top:10px;}
+.cdsub{font-size:9px;color:#555;}
+.cddate{font-size:11px;color:var(--gold);margin-top:2px;font-weight:500;}
+.fbar{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap;}
+.chip{font-size:11px;padding:5px 13px;border-radius:3px;border:1px solid var(--bordermd);cursor:pointer;color:var(--muted);background:var(--white);transition:all .15s;font-family:'DM Sans',sans-serif;letter-spacing:.2px;}
+.chip:hover{border-color:var(--black);color:var(--black);}
+.chip.active{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:500;}
+.phero{background:var(--ink);padding:44px 48px 0;border-bottom:3px solid var(--red);}
+.pcrumb{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:10px;}
+.pcrumb span{color:rgba(255,255,255,.7);}
+.ptt{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:2px;color:#fff;margin-bottom:6px;}
+.psub{font-size:13px;color:rgba(255,255,255,.5);max-width:500px;line-height:1.7;margin-bottom:28px;}
+.stabs{display:flex;}
+.stab{padding:10px 18px;font-size:11px;color:rgba(255,255,255,.4);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.3px;}
+.stab:hover{color:rgba(255,255,255,.75);}
+.stab.active{color:#fff;border-bottom-color:var(--red);}
+.rrow{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);}
+.rrow:last-child{border-bottom:none;}
+.mc{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:13px;}
+.mg{background:var(--gbg);color:var(--gold);border:1px solid var(--gborder);}
+.ms{background:#f5f5f5;color:#666;border:1px solid #ccc;}
+.mb{background:#fff7f0;color:#a05c2a;border:1px solid #d4a070;}
+.mr{background:var(--rbg);color:var(--red);border:1px solid var(--rborder);}
+.rname{font-size:13px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.rdet{font-size:11px;color:var(--muted);}
+.ryr{font-family:'DM Mono',monospace;font-size:11px;color:var(--subtle);}
+.blist{display:flex;flex-direction:column;gap:5px;}
+.brow{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--white);border:1px solid var(--border);border-radius:var(--r);transition:border-color .15s;cursor:pointer;}
+.brow:hover{border-color:var(--bordermd);}
+.bsw{width:36px;height:12px;border-radius:2px;flex-shrink:0;}
+.bky{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:52px;}
+.bnm{font-size:12px;font-weight:500;color:var(--black);flex:1;}
+.phgrid{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:200px 200px;gap:4px;}
+.pmain{grid-row:1/3;border-radius:var(--r) 0 0 var(--r);}
+.psm:first-of-type{border-radius:0 var(--r) 0 0;}
+.psm:last-of-type{border-radius:0 0 var(--r) 0;}
+.pblk{position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end;padding:12px;}
+.pblk:hover .pov{opacity:.7;}
+.pov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 60%);transition:opacity .2s;}
+.plbl{position:relative;font-size:11px;color:#fff;}
+.ptag{display:inline-block;background:var(--red);color:#fff;font-size:9px;font-weight:500;padding:2px 7px;border-radius:2px;margin-bottom:3px;letter-spacing:.5px;text-transform:uppercase;}
+.tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:4px;}
+.thmb{aspect-ratio:1;border-radius:var(--r);position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end;padding:8px;transition:transform .2s;}
+.thmb:hover{transform:scale(1.03);}
+.thov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 60%);}
+.thlbl{position:relative;font-size:10px;color:#fff;}
+.vcard{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;}
+.vcard:hover{border-color:var(--bordermd);box-shadow:0 4px 18px rgba(0,0,0,.07);transform:translateY(-2px);}
+.vthumb{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;}
+.pbtn{width:42px;height:42px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;transition:transform .15s;box-shadow:0 2px 12px rgba(204,0,0,.4);}
+.vcard:hover .pbtn{transform:scale(1.1);}
+.ptri{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:12px solid #fff;margin-left:3px;}
+.vdur{position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.65);color:#fff;font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:2px;}
+.vbody{padding:12px;}
+.vtt{font-size:12px;font-weight:500;color:var(--black);margin-bottom:3px;line-height:1.4;}
+.vmt{font-size:10px;color:var(--muted);}
+.nbig{background:var(--white);border:1px solid var(--border);border-top:4px solid var(--red);border-radius:var(--rl);padding:22px;}
+.nsrc{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.ntt{font-size:14px;font-weight:500;color:var(--black);line-height:1.5;margin-bottom:8px;}
+.nexc{font-size:12px;color:var(--muted);line-height:1.7;margin-bottom:12px;}
+.nbyl{font-size:10px;color:var(--subtle);}
+.nlnk{font-size:10px;color:var(--red);cursor:pointer;font-weight:500;}
+.pitem{display:grid;grid-template-columns:110px 1fr auto;gap:14px;align-items:center;padding:13px 0;border-bottom:1px solid var(--border);}
+.pitem:last-child{border-bottom:none;}
+.psrc{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.ptt2{font-size:12px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.pdt{font-size:10px;color:var(--muted);}
+.plnk{font-size:10px;color:var(--red);cursor:pointer;font-weight:500;white-space:nowrap;}
+.tl{position:relative;padding-left:24px;}
+.tl::before{content:'';position:absolute;left:7px;top:8px;bottom:0;width:1px;background:var(--mgrey);}
+.tli{position:relative;margin-bottom:20px;}
+.tldot{position:absolute;left:-24px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--red);border:2px solid var(--white);}
+.tldot.dim{background:var(--mgrey);}
+.tlyr{font-family:'DM Mono',monospace;font-size:10px;color:var(--red);margin-bottom:2px;}
+.tlyr.dim{color:var(--muted);}
+.tlev{font-size:12px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.tldet{font-size:11px;color:var(--muted);line-height:1.5;}
+.lcard{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:18px;display:flex;gap:14px;align-items:flex-start;}
+.lavt{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;flex-shrink:0;}
+.lnm{font-size:13px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.ltt{font-size:10px;color:var(--red);font-weight:500;margin-bottom:6px;letter-spacing:.3px;}
+.lbi{font-size:11px;color:var(--muted);line-height:1.6;}
+.mqt{background:var(--off);border:1px solid var(--border);border-left:4px solid var(--red);border-radius:var(--rl);padding:24px;margin-bottom:22px;}
+.mqlab{font-family:'DM Mono',monospace;font-size:9px;color:var(--red);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;}
+.mqtxt{font-size:13px;color:var(--black);line-height:1.9;font-style:italic;}
+.vcard2{background:var(--white);border:1px solid var(--border);border-top:3px solid;border-radius:var(--rl);padding:20px;}
+.vnm{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--black);margin-bottom:6px;}
+.vds{font-size:12px;color:var(--muted);line-height:1.6;}
+.fmtcard{background:var(--white);border:1px solid var(--border);border-top:3px solid;border-radius:var(--rl);padding:18px;cursor:pointer;transition:box-shadow .2s,transform .2s;}
+.fmtcard:hover{box-shadow:0 4px 16px rgba(0,0,0,.07);transform:translateY(-2px);}
+.fnm{font-size:13px;font-weight:500;color:var(--black);margin-bottom:6px;}
+.fds{font-size:11px;color:var(--muted);line-height:1.5;}
+.acard{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .2s;}
+.acard:hover{box-shadow:0 4px 20px rgba(0,0,0,.08);transform:translateY(-2px);}
+.aimg{height:100px;background:var(--off);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--mgrey);position:relative;}
+.abadge{position:absolute;top:10px;right:10px;background:var(--ink);color:var(--gold);font-family:'DM Mono',monospace;font-size:9px;padding:2px 8px;border-radius:2px;}
+.abody{padding:14px;}
+.anm{font-size:13px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.acat{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.astats{display:flex;gap:14px;}
+.ast{text-align:center;}
+.asn{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--black);line-height:1;}
+.asl{font-size:9px;color:var(--muted);}
+.hofcard{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:18px;display:flex;gap:14px;cursor:pointer;transition:border-color .2s,box-shadow .2s;}
+.hofcard:hover{border-color:var(--borderstr);box-shadow:0 2px 12px rgba(0,0,0,.06);}
+.hofn{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--lgrey);line-height:1;min-width:32px;}
+.hofnm{font-size:13px;font-weight:500;color:var(--black);margin-bottom:2px;}
+.hofdet{font-size:11px;color:var(--muted);line-height:1.5;}
+.hofyr{font-family:'DM Mono',monospace;font-size:9px;color:var(--red);margin-top:4px;}
+.ditem{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);}
+.ditem:last-child{border-bottom:none;}
+.ddot{width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;}
+.dnm{font-size:13px;font-weight:500;color:var(--black);flex:1;}
+.ddet{font-size:11px;color:var(--muted);}
+.dlnk{font-size:10px;color:var(--red);cursor:pointer;font-weight:500;}
+.mapbox{background:#e8ede8;border:1px solid var(--bordermd);border-radius:var(--rl);height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+.mapgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,107,63,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(0,107,63,.1) 1px,transparent 1px);background-size:28px 28px;}
+.cbox{background:var(--white);border:1px solid var(--border);border-top:4px solid var(--green);border-radius:var(--rl);padding:22px;}
+.crow{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);}
+.crow:last-child{border-bottom:none;}
+.cion{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);min-width:60px;padding-top:1px;}
+.cval{font-size:12px;color:var(--black);line-height:1.6;}
+.frmbox{background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:24px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.ffield{display:flex;flex-direction:column;gap:4px;}
+.flbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.finp{background:var(--off);border:1px solid var(--bordermd);border-radius:var(--r);padding:9px 12px;font-size:12px;color:var(--black);outline:none;font-family:'DM Sans',sans-serif;transition:border-color .15s;width:100%;}
+.finp:focus{border-color:var(--black);}
+.jmband{background:var(--ink);padding:20px 48px;display:flex;align-items:center;gap:20px;border-top:1px solid #222;border-bottom:1px solid #222;}
+.jmbflag{display:flex;gap:4px;}
+.jmbstripe{width:4px;height:28px;border-radius:1px;}
+.jmbtext{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase;}
+.jmbtext span{color:var(--gold);}
+footer{background:var(--ink);padding:36px 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;}
+.fcoltt{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;color:#fff;margin-bottom:12px;}
+.flnk{font-size:12px;color:#666;cursor:pointer;display:block;margin-bottom:7px;transition:color .15s;}
+.flnk:hover{color:var(--gold);}
+.fbot{background:#000;padding:14px 48px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid #1a1a1a;}
+.fcopy{font-family:'DM Mono',monospace;font-size:10px;color:#444;}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- NAV -->
+<nav>
+  <div class="nlogo" onclick="showPage('home')">
+    <div style="display:flex;flex-direction:column;line-height:1;"><div class="nlogo-k">IKD</div><div class="nlogo-sub">Jamaica</div></div>
+    <div class="nsep"></div>
+    <div><div class="ntext">International Karate</div><div class="nsub2">Daigaku · Jamaica Chapter</div></div>
+  </div>
+  <div class="nflag"><div class="nfs" style="background:#222;"></div><div class="nfs" style="background:#D4A800;"></div><div class="nfs" style="background:#006B3F;"></div></div>
+  <div class="nlinks">
+    <span class="nlink" id="nav-home"       onclick="showPage('home')">Home</span>
+    <span class="nlink" id="nav-about"      onclick="showPage('about')">About</span>
+    <span class="nlink" id="nav-events"     onclick="showPage('events')">Events</span>
+    <span class="nlink" id="nav-results"    onclick="showPage('results')">Results</span>
+    <span class="nlink" id="nav-training"   onclick="showPage('training')">Training</span>
+    <span class="nlink" id="nav-media"      onclick="showPage('media')">Media</span>
+    <span class="nlink" id="nav-membership" onclick="showPage('membership')">Membership</span>
+  </div>
+  <button class="ncta" onclick="showPage('membership')">Join IKD</button>
+</nav>
+<div class="jmbar"><div class="jmbs" style="background:var(--ink);flex:4;"></div><div class="jmbs" style="background:var(--gold);flex:1;"></div><div class="jmbs" style="background:var(--green);flex:1;"></div></div>
+
+<!-- HOME -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hgrid"></div>
+    <div class="hstripes"><div class="hs" style="background:#111;"></div><div class="hs" style="background:#D4A800;max-height:48px;"></div><div class="hs" style="background:#006B3F;"></div></div>
+    <div class="hkanji">空手</div>
+    <div class="hline"></div>
+    <div class="hcontent">
+      <div class="hjmbadge"><div class="hjmbs" style="background:#222;"></div><div class="hjmbs" style="background:#D4A800;"></div><div class="hjmbs" style="background:#006B3F;"></div><span>Official IKD Chapter · Jamaica</span></div>
+      <h1 class="htitle">Jamaica<br><span class="tr">Karate</span><br><span class="tg">Daigaku</span></h1>
+      <p class="hbody">The International Karate Daigaku Jamaica chapter — carrying Shotokan tradition since 1976, developing champions, empowering youth through discipline.</p>
+      <div class="hbtns"><button class="btn-r" onclick="showPage('events')">Upcoming Events</button><button class="btn-gw" onclick="showPage('about')">Our History</button></div>
+    </div>
+  </div>
+  <div class="statsbar">
+    <div class="stat"><div class="stn">2006</div><div class="stl">Jamaica chapter founded</div></div>
+    <div class="stat"><div class="stn">63</div><div class="stl">Countries in IKD World</div></div>
+    <div class="stat"><div class="stn jg">#17</div><div class="stl">WKF world ranking — Evans</div></div>
+    <div class="stat"><div class="stn">1976</div><div class="stl">Jamaica's IKD roots begin</div></div>
+  </div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-r"><div class="eyline" style="background:var(--red);"></div>Upcoming</div><div class="sett">Events & Tournaments</div></div>
+    <div class="fevent">
+      <div>
+        <div class="feye">International · Camp</div>
+        <div class="fett">IKD World Camp 2026</div>
+        <div class="femeta"><strong>June 18–21, 2026</strong> · YMCA Camp Wanakita, Haliburton, Ontario<br>Shuseki Shihan Frank Woon-A-Tai (10th Dan) · IKD Shihan-kai instructors<br>Early bird registration closes May 15, 2026</div>
+        <div class="fetags"><span class="fetag">Training camp</span><span class="fetag">All ages</span><span class="fetag">International travel</span></div>
+        <div class="febtns"><button class="btn-r">Register Now</button><button class="btn-out" onclick="showPage('events')">Full Details</button></div>
+      </div>
+      <div class="cdown">
+        <div class="cdtop">COUNTDOWN</div>
+        <div class="cdnums"><div class="cdu"><div class="cdn" id="cd-d">54</div><div class="cdul">DAYS</div></div><div class="cdu"><div class="cdn" id="cd-h">12</div><div class="cdul">HRS</div></div><div class="cdu"><div class="cdn" id="cd-m">08</div><div class="cdul">MIN</div></div></div>
+        <div class="cddiv"><div class="cdsub">Early bird ends</div><div class="cddate">May 15, 2026</div></div>
+      </div>
+    </div>
+    <div class="cards c3">
+      <div class="card" onclick="showPage('events')"><div class="caccent" style="background:var(--red);"></div><div class="cbody"><div class="cbadge br">Tournament · Caribbean</div><div class="ctitle">IKD Caribbean Cup 2026</div><div class="cmeta">Date TBC · Caribbean region</div></div><div class="cfoot"><span class="stp">Announcement pending</span><span class="clink">Notify me</span></div></div>
+      <div class="card" onclick="showPage('events')"><div class="caccent" style="background:var(--gold);"></div><div class="cbody"><div class="cbadge bg">Grading · National</div><div class="ctitle">National rank examination</div><div class="cmeta">Kingston, Jamaica · TBC 2026</div></div><div class="cfoot"><span class="stt">Date to be confirmed</span><span class="clink">Learn more</span></div></div>
+      <div class="card" onclick="showPage('events')"><div class="caccent" style="background:var(--mgrey);"></div><div class="cbody"><div class="cbadge bgy">Tournament · National</div><div class="ctitle">Jamaica national championships</div><div class="cmeta">Kingston, Jamaica · TBC 2026</div></div><div class="cfoot"><span class="stt">Date to be confirmed</span><span class="clink">Learn more</span></div></div>
+    </div>
+  </div>
+  <div class="jmband">
+    <div class="jmbflag"><div class="jmbstripe" style="background:#222;"></div><div class="jmbstripe" style="background:#D4A800;"></div><div class="jmbstripe" style="background:#006B3F;"></div></div>
+    <div class="jmbtext">IKD Jamaica · <span>Kingston · Founded 2006</span> · Affiliated with IKD World Honbu, Toronto</div>
+  </div>
+  <div class="sec sec-alt">
+    <div class="sech"><div class="seye ey-g"><div class="eyline" style="background:var(--gold);"></div>Performance</div><div class="sett">Recent Results</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+      <div>
+        <div class="rrow"><div class="mc mg">1st</div><div><div class="rname">Rasandre Evans</div><div class="rdet">Central Caribbean Cup · Cadet kumite 57kg · Panama</div></div><div class="ryr">2025</div></div>
+        <div class="rrow"><div class="mc mb">3rd</div><div><div class="rname">Andrew Evans</div><div class="rdet">Central Caribbean Cup · Kumite · Panama</div></div><div class="ryr">2025</div></div>
+        <div class="rrow"><div class="mc mr" style="font-size:10px;">HOST</div><div><div class="rname">IKD Caribbean Cup host</div><div class="rdet">Kingston, Jamaica · All IKD formats</div></div><div class="ryr">2016</div></div>
+        <div class="rrow"><div class="mc ms" style="font-size:10px;">POD</div><div><div class="rname">Jamaica team kumite</div><div class="rdet">IKD World Cup · Toronto · 1st edition</div></div><div class="ryr">2012</div></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="cards c2" style="gap:10px;">
+          <div class="card" style="cursor:default;"><div class="cbody" style="text-align:center;padding:20px 14px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--ink);line-height:1;">#17</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">WKF world ranking<br>Rasandre Evans</div></div></div>
+          <div class="card" style="cursor:default;"><div class="cbody" style="text-align:center;padding:20px 14px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--ink);line-height:1;">63</div><div style="font-size:11px;color:var(--muted);margin-top:4px;">IKD countries<br>Jamaica connected</div></div></div>
+        </div>
+        <button class="btn-blk" style="width:100%;" onclick="showPage('results')">View full results archive →</button>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>Explore</div><div class="sett">More from IKD Jamaica</div></div>
+    <div class="cards c3">
+      <div class="card" onclick="showPage('about')"><div class="caccent" style="background:var(--red);"></div><div class="cbody" style="padding:20px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--lgrey);margin-bottom:10px;">1976</div><div class="ctitle" style="font-size:14px;">Our History</div><div class="cmeta">From the founder's Jamaica connection in 1976 to the island's first IKD chapter in 2006.</div></div><div class="cfoot"><span class="clink" style="font-size:11px;">Read more →</span></div></div>
+      <div class="card" onclick="showPage('training')"><div class="caccent" style="background:var(--gold);"></div><div class="cbody" style="padding:20px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--lgrey);margin-bottom:10px;">9 KYU</div><div class="ctitle" style="font-size:14px;">Find a Dojo</div><div class="cmeta">Locate an IKD-affiliated club near you across Jamaica.</div></div><div class="cfoot"><span class="clink" style="font-size:11px;color:var(--green);">Find clubs →</span></div></div>
+      <div class="card" onclick="showPage('results')"><div class="caccent" style="background:var(--green);"></div><div class="cbody" style="padding:20px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--lgrey);margin-bottom:10px;">HALL</div><div class="ctitle" style="font-size:14px;">Hall of Fame</div><div class="cmeta">Celebrating the athletes and officials who built Jamaican karate.</div></div><div class="cfoot"><span class="clink" style="font-size:11px;color:var(--green);">View honourees →</span></div></div>
+    </div>
+  </div>
+  <footer><div><div class="fcoltt">IKD Jamaica</div><span class="flnk" onclick="showPage('about')">About us</span><span class="flnk" onclick="showPage('about')">History & timeline</span><span class="flnk" onclick="showPage('about')">Leadership</span></div><div><div class="fcoltt">Compete & Train</div><span class="flnk" onclick="showPage('events')">Upcoming events</span><span class="flnk" onclick="showPage('training')">Find a dojo</span><span class="flnk" onclick="showPage('training')">Belt syllabus</span><span class="flnk" onclick="showPage('results')">Results archive</span></div><div><div class="fcoltt">Connect</div><span class="flnk" onclick="showPage('membership')">Join IKD Jamaica</span><span class="flnk" onclick="showPage('media')">Media & gallery</span><span class="flnk" onclick="showPage('membership')">Contact us</span><span class="flnk">IKD World ↗</span></div></footer>
+  <div class="fbot"><span class="fcopy">© 2026 IKD Jamaica</span><span class="fcopy">Affiliated with IKD World Honbu Inc., Toronto, Canada</span></div>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="page-about">
+  <div class="phero"><div class="pcrumb">Home › <span>About IKD Jamaica</span></div><h1 class="ptt">About IKD Jamaica</h1><p class="psub">A chapter of the IKD — rooted in Shotokan tradition, committed to developing Jamaica's next generation of karatekas.</p><div class="stabs"><div class="stab active">Our story</div><div class="stab">Mission & values</div><div class="stab">Leadership</div><div class="stab">Timeline</div><div class="stab">Affiliation</div></div></div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-r"><div class="eyline" style="background:var(--red);"></div>Our story</div><div class="sett">Shotokan in Jamaica since 1976</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;">
+      <div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:14px;">Jamaica's connection to Shotokan karate runs deep. Shuseki Shihan Frank Woon-A-Tai — the IKD's founder — served as Jamaica's chief instructor from 1976 to 1980, laying the foundation for a tradition that endures today.</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.9;margin-bottom:14px;">The Jamaica Shotokan Karate School, operating as IKD Jamaica, was established as a non-profit in 2006 with a clear mission: to make karate accessible to everyone on the island, regardless of background.</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.9;">In 2016, Jamaica hosted the IKD Caribbean Cup in Kingston — a milestone event that showcased Jamaica's standing within the global IKD community.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="card" style="cursor:default;border-top:3px solid var(--red);"><div class="cbody"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--red);letter-spacing:1px;margin-bottom:4px;">FOUNDED</div><div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--ink);line-height:1;">2006</div><div style="font-size:11px;color:var(--muted);">Jamaica Shotokan Karate School</div></div></div>
+        <div class="card" style="cursor:default;border-top:3px solid var(--gold);"><div class="cbody"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:1px;margin-bottom:4px;">IKD WORLD PRESENCE</div><div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--ink);line-height:1;">63 Countries</div><div style="font-size:11px;color:var(--muted);">Jamaica part of a global network</div></div></div>
+        <div class="card" style="cursor:default;border-top:3px solid var(--green);"><div class="cbody"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green);letter-spacing:1px;margin-bottom:4px;">JAMAICA ROOTS</div><div style="font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--ink);line-height:1;">1976</div><div style="font-size:11px;color:var(--muted);">Founder's first Jamaica connection</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="sec sec-alt">
+    <div class="sech"><div class="seye ey-r"><div class="eyline" style="background:var(--red);"></div>Mission & values</div><div class="sett">Why We Train</div></div>
+    <div class="mqt"><div class="mqlab">Mission statement</div><p class="mqtxt">"The IKD will use traditional and modern applied research to offer the highest level of karate to all students. IKD will uphold standards of excellence that inspire students to improve character development and instil core values of respect, honour and discipline — and empower children and youth to live socially and emotionally healthy lives."</p></div>
+    <div class="cards c3">
+      <div class="vcard2" style="border-top-color:var(--red);"><div class="vnm">Discipline</div><div class="vds">Training builds mental and physical discipline that carries beyond the dojo into everyday life.</div></div>
+      <div class="vcard2" style="border-top-color:var(--gold);"><div class="vnm">Respect</div><div class="vds">Mutual respect between students, instructors and opponents is the foundation of all IKD practice.</div></div>
+      <div class="vcard2" style="border-top-color:var(--green);"><div class="vnm">Community</div><div class="vds">Karate as a vehicle for youth development — keeping young people on a path of health and purpose.</div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>Leadership</div><div class="sett">The People Behind IKD Jamaica</div></div>
+    <div class="cards c2">
+      <div class="lcard"><div class="lavt" style="background:var(--rbg);color:var(--red);">CI</div><div><div class="lnm">Chief instructor</div><div class="ltt">Sensei — IKD Jamaica</div><div class="lbi">Head of technical instruction for IKD Jamaica. Responsible for maintaining IKD standards across all affiliated dojos.</div></div></div>
+      <div class="lcard"><div class="lavt" style="background:var(--gbg);color:var(--gold);">PR</div><div><div class="lnm">President / chairman</div><div class="ltt" style="color:var(--gold);">IKD Jamaica executive</div><div class="lbi">Oversees organisational affairs, event hosting, national team selection, and IKD World relations.</div></div></div>
+      <div class="lcard"><div class="lavt" style="background:var(--grbg);color:var(--green);">SE</div><div><div class="lnm">Secretary / administrator</div><div class="ltt" style="color:var(--green);">IKD Jamaica executive</div><div class="lbi">Manages membership records, grading applications, correspondence and day-to-day administration.</div></div></div>
+      <div class="lcard" style="border-style:dashed;flex-direction:column;align-items:center;text-align:center;gap:6px;"><div class="lbi">Shuseki Shihan Frank Woon-A-Tai (10th Dan) — Founder & Chief Instructor, IKD World Honbu, Toronto</div></div>
+    </div>
+  </div>
+  <div class="sec sec-alt">
+    <div class="sech"><div class="seye ey-r"><div class="eyline" style="background:var(--red);"></div>Timeline</div><div class="sett">Key Milestones</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+      <div class="tl"><div class="tli"><div class="tldot"></div><div class="tlyr">1976</div><div class="tlev">IKD founder's Jamaica connection begins</div><div class="tldet">Shihan Woon-A-Tai serves as Jamaica's chief Shotokan instructor</div></div><div class="tli"><div class="tldot"></div><div class="tlyr">2006</div><div class="tlev">Jamaica Shotokan Karate School founded</div><div class="tldet">Non-profit established in Kingston to train all ages</div></div><div class="tli"><div class="tldot"></div><div class="tlyr">2011</div><div class="tlev">IKD founded internationally</div><div class="tldet">Jamaica joins as a founding regional chapter</div></div><div class="tli"><div class="tldot"></div><div class="tlyr">2012</div><div class="tlev">IKD World Cup — first edition</div><div class="tldet">Jamaica competes in Toronto — Team Kumite podium</div></div></div>
+      <div class="tl"><div class="tli"><div class="tldot"></div><div class="tlyr">2016</div><div class="tlev">Jamaica hosts IKD Caribbean Cup</div><div class="tldet">Kingston welcomes Caribbean nations</div></div><div class="tli"><div class="tldot"></div><div class="tlyr">2019</div><div class="tlev">IKD Caribbean Karate Cup</div><div class="tldet">Jamaica competes in Team Kata and Kumite</div></div><div class="tli"><div class="tldot"></div><div class="tlyr">2025</div><div class="tlev">Central Caribbean Cup gold medal</div><div class="tldet">Rasandre Evans wins gold in Panama; WKF #17</div></div><div class="tli"><div class="tldot dim"></div><div class="tlyr dim">2026</div><div class="tlev" style="color:var(--muted);">IKD World Camp returns</div><div class="tldet">Jamaica attends Haliburton, Ontario · June 18–21</div></div></div>
+    </div>
+  </div>
+  <footer><div><div class="fcoltt">IKD Jamaica</div><span class="flnk" onclick="showPage('home')">Home</span><span class="flnk" onclick="showPage('events')">Events</span></div><div><div class="fcoltt">Compete</div><span class="flnk" onclick="showPage('results')">Results</span><span class="flnk" onclick="showPage('training')">Training</span></div><div><div class="fcoltt">Connect</div><span class="flnk" onclick="showPage('membership')">Join</span><span class="flnk">IKD World ↗</span></div></footer>
+  <div class="fbot"><span class="fcopy">© 2026 IKD Jamaica</span><span class="fcopy">Affiliated with IKD World Honbu Inc., Toronto</span></div>
+</div>
+
+<!-- EVENTS -->
+<div class="page" id="page-events">
+  <div class="phero"><div class="pcrumb">Home › <span>Events</span></div><h1 class="ptt">Events & Tournaments</h1><p class="psub">Upcoming competitions, camps, grading sessions and clinics — from local club events to the IKD Caribbean Cup and World Cup.</p><div class="stabs"><div class="stab active">Upcoming</div><div class="stab">Calendar</div><div class="stab">Past events</div><div class="stab">Register</div></div></div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-r"><div class="eyline" style="background:var(--red);"></div>Featured event</div><div class="sett">Next Major Event</div></div>
+    <div class="fevent">
+      <div>
+        <div class="feye">International · Camp</div>
+        <div class="fett">IKD World Camp 2026</div>
+        <div class="femeta"><strong>June 18–21, 2026</strong> · YMCA Camp Wanakita, Haliburton, Ontario<br>Train with world-class IKD Shihan. Tai Chi, Squid Games and karaoke. Early bird registration closes May 15, 2026</div>
+        <div class="fetags"><span class="fetag">Training camp</span><span class="fetag">All ages</span><span class="fetag">International</span><span class="fetag">Early bird open</span></div>
+        <div class="febtns"><button class="btn-r">Register Now</button><button class="btn-out">Full Details</button></div>
+      </div>
+      <div class="cdown">
+        <div class="cdtop">COUNTDOWN</div>
+        <div class="cdnums"><div class="cdu"><div class="cdn" id="cd-d2">54</div><div class="cdul">DAYS</div></div><div class="cdu"><div class="cdn" id="cd-h2">12</div><div class="cdul">HRS</div></div><div class="cdu"><div class="cdn" id="cd-m2">08</div><div class="cdul">MIN</div></div></div>
+        <div class="cddiv"><div class="cdsub">Early bird ends</div><div class="cddate">May 15, 2026</div></div>
+      </div>
+    </div>
+    <div class="fbar"><span class="chip active">All events</span><span class="chip">Tournaments</span><span class="chip">Camps</span><span class="chip">Grading</span><span class="chip">Clinics</span><span class="chip">International</span></div>
+    <div class="cards c2">
+      <div class="card"><div class="caccent" style="background:var(--red);"></div><div class="cbody"><div class="cbadge br">Tournament · Caribbean</div><div class="ctitle">IKD Caribbean Cup 2026</div><div class="cmeta">Date TBC · Caribbean region · All IKD formats</div></div><div class="cfoot"><span class="stp">Announcement pending</span><span class="clink">Notify me</span></div></div>
+      <div class="card"><div class="caccent" style="background:var(--red);"></div><div class="cbody"><div class="cbadge br">Camp · International</div><div class="ctitle">IKD World Camp 2026</div><div class="cmeta">June 18–21 · Haliburton, Ontario, Canada</div></div><div class="cfoot"><span class="sto">Registration open</span><span class="clink">Register →</span></div></div>
+      <div class="card"><div class="caccent" style="background:var(--gold);"></div><div class="cbody"><div class="cbadge bg">Grading · National</div><div class="ctitle">National rank examination — Kyu grades</div><div class="cmeta">TBC 2026 · Kingston, Jamaica</div></div><div class="cfoot"><span class="stt">Date to be confirmed</span><span class="clink">Learn more</span></div></div>
+      <div class="card"><div class="caccent" style="background:var(--mgrey);"></div><div class="cbody"><div class="cbadge bgy">Tournament · National</div><div class="ctitle">Jamaica national karate championships</div><div class="cmeta">TBC 2026 · Kingston, Jamaica</div></div><div class="cfoot"><span class="stt">Date to be confirmed</span><span class="clink">Learn more</span></div></div>
+    </div>
+  </div>
+  <div class="sec sec-alt">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>Past events</div><div class="sett">Event Archive</div></div>
+    <div>
+      <div class="rrow" style="grid-template-columns:90px 1fr auto;"><div class="ryr">Mar 2025</div><div><div class="rname">Central Caribbean Cup — Panama</div><div class="rdet">Kumite · 9-person Jamaica delegation</div></div><div class="cbadge bg">Gold + Bronze</div></div>
+      <div class="rrow" style="grid-template-columns:90px 1fr auto;"><div class="ryr">2019</div><div><div class="rname">IKD Caribbean Karate Cup</div><div class="rdet">Team Kata · Team Kumite divisions</div></div><div class="cbadge bgy">Results →</div></div>
+      <div class="rrow" style="grid-template-columns:90px 1fr auto;"><div class="ryr">Jul 2016</div><div><div class="rname">IKD Caribbean Cup — Host nation</div><div class="rdet">Kingston, Jamaica · All IKD competitive formats</div></div><div class="cbadge bgr">Host</div></div>
+      <div class="rrow" style="grid-template-columns:90px 1fr auto;"><div class="ryr">Jul 2012</div><div><div class="rname">IKD World Cup — 1st edition</div><div class="rdet">Ryerson University, Toronto · Team Kumite podium</div></div><div class="cbadge br">Podium</div></div>
+    </div>
+  </div>
+  <footer><div><div class="fcoltt">IKD Jamaica</div><span class="flnk" onclick="showPage('home')">Home</span><span class="flnk" onclick="showPage('about')">About</span></div><div><div class="fcoltt">Compete</div><span class="flnk" onclick="showPage('results')">Results</span><span class="flnk" onclick="showPage('training')">Training</span></div><div><div class="fcoltt">Connect</div><span class="flnk" onclick="showPage('membership')">Join</span></div></footer>
+  <div class="fbot"><span class="fcopy">© 2026 IKD Jamaica</span><span class="fcopy">Affiliated with IKD World Honbu Inc., Toronto</span></div>
+</div>
+
+<!-- RESULTS -->
+<div class="page" id="page-results">
+  <div class="phero"><div class="pcrumb">Home › <span>Results & Rankings</span></div><h1 class="ptt">Results & Rankings</h1><p class="psub">Jamaica's competitive record across IKD Caribbean Cups, World Cups and regional events.</p><div class="stabs"><div class="stab active">Medal archive</div><div class="stab">Athlete profiles</div><div class="stab">Hall of fame</div><div class="stab">National teams</div></div></div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-g"><div class="eyline" style="background:var(--gold);"></div>Medal archive</div><div class="sett">Jamaica's Competitive Record</div></div>
+    <div class="fbar"><span class="chip active">All events</span><span class="chip">World Cup</span><span class="chip">Caribbean Cup</span><span class="chip">Nationals</span><span class="chip">Kata</span><span class="chip">Kumite</span></div>
+    <div>
+      <div class="rrow"><div class="mc mg">1st</div><div><div class="rname">Rasandre Evans</div><div class="rdet">Central Caribbean Cup · Cadet male kumite 57kg · Panama · Defeated competitors from Panama, Puerto Rico & Venezuela</div></div><div class="ryr">Mar 2025</div></div>
+      <div class="rrow"><div class="mc mb">3rd</div><div><div class="rname">Andrew Evans</div><div class="rdet">Central Caribbean Cup · Kumite · Panama</div></div><div class="ryr">Mar 2025</div></div>
+      <div class="rrow"><div class="mc ms" style="font-size:12px;">POD</div><div><div class="rname">Jamaica team kumite</div><div class="rdet">IKD World Cup 1st edition · Toronto · Team competition podium finish</div></div><div class="ryr">Jul 2012</div></div>
+      <div class="rrow"><div class="mc mr" style="font-size:10px;">HOST</div><div><div class="rname">IKD Caribbean Cup host nation</div><div class="rdet">Kingston, Jamaica · Individual Kata, Kumite, Team Kata, Team Kumite, Bunkai & Enbu</div></div><div class="ryr">Jul 2016</div></div>
+    </div>
+  </div>
+  <div class="sec sec-alt">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>Athlete profiles</div><div class="sett">Jamaica's Competitors</div></div>
+    <div class="cards c3">
+      <div class="acard"><div class="aimg">RE<div class="abadge">WKF #17</div></div><div class="abody"><div class="anm">Rasandre Evans</div><div class="acat">Cadet · Kumite 57kg</div><div class="astats"><div class="ast"><div class="asn">1</div><div class="asl">Gold</div></div><div class="ast"><div class="asn">0</div><div class="asl">Silver</div></div><div class="ast"><div class="asn">0</div><div class="asl">Bronze</div></div></div></div></div>
+      <div class="acard"><div class="aimg">AE</div><div class="abody"><div class="anm">Andrew Evans</div><div class="acat">Kumite · Open</div><div class="astats"><div class="ast"><div class="asn">0</div><div class="asl">Gold</div></div><div class="ast"><div class="asn">0</div><div class="asl">Silver</div></div><div class="ast"><div class="asn">1</div><div class="asl">Bronze</div></div></div></div></div>
+      <div class="acard" style="border-style:dashed;display:flex;align-items:center;justify-content:center;min-height:180px;flex-direction:column;gap:6px;"><div style="font-size:28px;color:var(--mgrey);">+</div><div style="font-size:12px;color:var(--muted);">More athlete profiles</div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-g"><div class="eyline" style="background:var(--gold);"></div>Hall of fame</div><div class="sett">Jamaica's Karate Honourees</div></div>
+    <div class="cards c2">
+      <div class="hofcard"><div class="hofn">01</div><div><div class="hofnm">Shuseki Shihan Frank Woon-A-Tai</div><div class="hofdet">Founder of the IKD · Jamaica's chief instructor 1976–1980 · 10th Dan</div><div class="hofyr">Inducted · Legacy member</div></div></div>
+      <div class="hofcard"><div class="hofn">02</div><div><div class="hofnm">Rasandre Evans</div><div class="hofdet">2025 Central Caribbean Cup gold medallist · WKF world ranking #17</div><div class="hofyr">Active · 2025</div></div></div>
+    </div>
+  </div>
+  <footer><div><div class="fcoltt">IKD Jamaica</div><span class="flnk" onclick="showPage('home')">Home</span><span class="flnk" onclick="showPage('about')">About</span></div><div><div class="fcoltt">Train</div><span class="flnk" onclick="showPage('training')">Find a dojo</span><span class="flnk" onclick="showPage('events')">Events</span></div><div><div class="fcoltt">Connect</div><span class="flnk" onclick="showPage('membership')">Join</span></div></footer>
+  <div class="fbot"><span class="fcopy">© 2026 IKD Jamaica</span><span class="fcopy">Affiliated with IKD World Honbu Inc., Toronto</span></div>
+</div>
+
+<!-- TRAINING -->
+<div class="page" id="page-training">
+  <div class="phero"><div class="pcrumb">Home › <span>Training</span></div><h1 class="ptt">Training with IKD Jamaica</h1><p class="psub">Everything you need to start, progress and compete — from your first white belt to national team selection.</p><div class="stabs"><div class="stab active">Belt syllabus</div><div class="stab">Find a dojo</div><div class="stab">Grading</div><div class="stab">Tournament formats</div><div class="stab">Rules</div></div></div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>Belt syllabus</div><div class="sett">IKD Rank Progression</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:12px;">KYU GRADES — STUDENT RANKS</div>
+        <div class="blist">
+          <div class="brow"><div class="bsw" style="background:#f0f0f0;border:1px solid #ccc;"></div><span class="bky">9th Kyu</span><span class="bnm">White belt</span><div class="cbadge bgy" style="font-size:9px;padding:2px 7px;">Beginner</div></div>
+          <div class="brow"><div class="bsw" style="background:#f5c518;"></div><span class="bky">8th Kyu</span><span class="bnm">Yellow belt</span><div class="cbadge bgy" style="font-size:9px;padding:2px 7px;">Kyu</div></div>
+          <div class="brow"><div class="bsw" style="background:#ff8c00;"></div><span class="bky">7th Kyu</span><span class="bnm">Orange belt</span><div class="cbadge bgy" style="font-size:9px;padding:2px 7px;">Kyu</div></div>
+          <div class="brow"><div class="bsw" style="background:#2e8b57;"></div><span class="bky">6th–5th Kyu</span><span class="bnm">Green belt</span><div class="cbadge bgy" style="font-size:9px;padding:2px 7px;">Kyu</div></div>
+          <div class="brow"><div class="bsw" style="background:#1e90ff;"></div><span class="bky">4th–3rd Kyu</span><span class="bnm">Blue belt</span><div class="cbadge bgy" style="font-size:9px;padding:2px 7px;">Kyu</div></div>
+          <div class="brow"><div class="bsw" style="background:#8b4513;"></div><span class="bky">2nd–1st Kyu</span><span class="bnm">Brown belt</span><div class="cbadge br" style="font-size:9px;padding:2px 7px;">Pre-Dan</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:12px;">DAN GRADES — BLACK BELT RANKS</div>
+        <div class="blist">
+          <div class="brow" style="border-left:3px solid var(--ink);border-radius:0 var(--r) var(--r) 0;"><div class="bsw" style="background:#111;border:1px solid #333;"></div><span class="bky">1st Dan</span><span class="bnm">Shodan</span><div class="cbadge bk" style="font-size:9px;padding:2px 7px;">Black belt</div></div>
+          <div class="brow" style="border-left:3px solid var(--ink);border-radius:0 var(--r) var(--r) 0;"><div class="bsw" style="background:#111;border:1px solid #333;"></div><span class="bky">2nd Dan</span><span class="bnm">Nidan</span><div class="cbadge bk" style="font-size:9px;padding:2px 7px;">Black belt</div></div>
+          <div class="brow" style="border-left:3px solid var(--ink);border-radius:0 var(--r) var(--r) 0;"><div class="bsw" style="background:#111;border:1px solid #333;"></div><span class="bky">3rd Dan</span><span class="bnm">Sandan</span><div class="cbadge bk" style="font-size:9px;padding:2px 7px;">Black belt</div></div>
+          <div class="brow" style="border-left:3px solid var(--ink);border-radius:0 var(--r) var(--r) 0;"><div class="bsw" style="background:#111;border:1px solid #333;"></div><span class="bky">4th Dan</span><span class="bnm">Yondan</span><div class="cbadge bk" style="font-size:9px;padding:2px 7px;">Sensei level</div></div>
+          <div class="brow" style="border-left:3px solid var(--ink);border-radius:0 var(--r) var(--r) 0;"><div class="bsw" style="background:#111;border:1px solid #333;"></div><span class="bky">5th Dan+</span><span class="bnm">Godan and above</span><div class="cbadge bg" style="font-size:9px;padding:2px 7px;">IKD Diploma</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sec sec-alt">
+    <div class="sech"><div class="seye ey-gr"><div class="eyline" style="background:var(--green);"></div>Find a dojo</div><div class="sett">IKD-Affiliated Clubs in Jamaica</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+      <div>
+        <div class="mapbox"><div class="mapgrid"></div><div style="position:relative;text-align:center;"><div style="font-size:12px;color:#555;font-weight:500;margin-bottom:4px;">Jamaica dojo map</div><div style="font-size:11px;color:#888;">Google Maps embed — clubs pinned by parish</div></div><div style="position:absolute;top:35%;left:54%;width:12px;height:12px;background:var(--red);border-radius:50%;border:2px solid #fff;"></div><div style="position:absolute;top:55%;left:44%;width:12px;height:12px;background:var(--red);border-radius:50%;border:2px solid #fff;"></div><div style="position:absolute;top:62%;left:61%;width:12px;height:12px;background:var(--red);border-radius:50%;border:2px solid #fff;"></div></div>
+        <div style="margin-top:10px;display:flex;gap:8px;"><input placeholder="Search by parish or area..." class="finp" style="flex:1;"><button class="btn-blk btn-sm">Search</button></div>
+      </div>
+      <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--rl);padding:16px;">
+        <div class="ditem"><div class="ddot"></div><div><div class="dnm">Jamaica Shotokan Karate School</div><div class="ddet">Kingston · Head dojo · Est. 2006</div></div><div class="dlnk">Directions</div></div>
+        <div class="ditem"><div class="ddot"></div><div><div class="dnm">IKD Jamaica — St. Andrew</div><div class="ddet">St. Andrew · Affiliated club</div></div><div class="dlnk">Directions</div></div>
+        <div class="ditem"><div class="ddot"></div><div><div class="dnm">IKD Jamaica — St. Catherine</div><div class="ddet">St. Catherine · Affiliated club</div></div><div class="dlnk">Directions</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>Tournament formats</div><div class="sett">IKD Competitive Events</div></div>
+    <div class="cards c3">
+      <div class="fmtcard" style="border-top-color:var(--red);"><div class="fnm">Individual kata</div><div class="fds">Solo performance of a prescribed kata sequence, judged on technique, power, speed, timing and focus.</div></div>
+      <div class="fmtcard" style="border-top-color:var(--red);"><div class="fnm">Individual kumite</div><div class="fds">One-on-one controlled sparring. IKD rules emphasise budo principles — technique quality over aggression.</div></div>
+      <div class="fmtcard" style="border-top-color:var(--gold);"><div class="fnm">Team kata</div><div class="fds">Three-person team performing kata in perfect synchronisation. Requires precision and months of practice.</div></div>
+      <div class="fmtcard" style="border-top-color:var(--gold);"><div class="fnm">Team kumite</div><div class="fds">Team-based sparring. Jamaica reached the podium in this format at the IKD World Cup first edition.</div></div>
+      <div class="fmtcard" style="border-top-color:var(--green);"><div class="fnm">Bunkai</div><div class="fds">Practical application of kata techniques — performed with a partner to demonstrate real-world meaning.</div></div>
+      <div class="fmtcard" style="border-top-color:var(--green);"><div class="fnm">Enbu</div><div class="fds">Choreographed partner demonstration combining kata, bunkai and artistic expression. Unique to IKD.</div></div>
+    </div>
+  </div>
+  <footer><div><div class="fcoltt">IKD Jamaica</div><span class="flnk" onclick="showPage('home')">Home</span><span class="flnk" onclick="showPage('about')">About</span></div><div><div class="fcoltt">Compete</div><span class="flnk" onclick="showPage('results')">Results</span><span class="flnk" onclick="showPage('events')">Events</span></div><div><div class="fcoltt">Connect</div><span class="flnk" onclick="showPage('membership')">Join</span></div></footer>
+  <div class="fbot"><span class="fcopy">© 2026 IKD Jamaica</span><span class="fcopy">Affiliated with IKD World Honbu Inc., Toronto</span></div>
+</div>
+
+<!-- MEDIA -->
+<div class="page" id="page-media">
+  <div class="phero"><div class="pcrumb">Home › <span>Media & Gallery</span></div><h1 class="ptt">Media & Gallery</h1><p class="psub">Photos, videos and news from IKD Jamaica — tournaments, training camps, grading ceremonies and the people who make it happen.</p><div class="stabs"><div class="stab active">Photos</div><div class="stab">Videos</div><div class="stab">News</div><div class="stab">Press coverage</div></div></div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>Photos</div><div class="sett">Photo Gallery</div></div>
+    <div class="fbar"><span class="chip active">All</span><span class="chip">Tournaments</span><span class="chip">Camps</span><span class="chip">Grading</span><span class="chip">Training</span><span class="chip">Caribbean Cup</span></div>
+    <div class="phgrid">
+      <div class="pblk pmain" style="background:#2d4a2d;"><div class="pov"></div><div class="plbl"><div class="ptag">Featured</div><div>Central Caribbean Cup 2025 — Panama</div><div style="font-size:10px;color:#ccc;margin-top:1px;">Rasandre Evans · Gold medal · Kumite 57kg</div></div></div>
+      <div class="pblk psm" style="background:#4a3020;"><div class="pov"></div><div class="plbl">IKD Caribbean Cup 2016 · Kingston</div></div>
+      <div class="pblk psm" style="background:#202040;"><div class="pov"></div><div class="plbl">IKD World Cup 2012 · Toronto</div></div>
+    </div>
+    <div class="tgrid">
+      <div class="thmb" style="background:#2d4a2d;"><div class="thov"></div><div class="thlbl">Training clinic</div></div>
+      <div class="thmb" style="background:#4a3020;"><div class="thov"></div><div class="thlbl">Grading ceremony</div></div>
+      <div class="thmb" style="background:#202040;"><div class="thov"></div><div class="thlbl">Team kata</div></div>
+      <div class="thmb" style="background:#3a3a20;position:relative;"><div class="thov"></div><div class="thlbl">Kumite</div><div style="position:absolute;inset:0;background:rgba(0,0,0,.45);border-radius:var(--r);display:flex;align-items:center;justify-content:center;"><span style="color:#fff;font-size:14px;font-weight:500;">+48 more</span></div></div>
+    </div>
+  </div>
+  <div class="sec sec-alt">
+    <div class="sech"><div class="seye ey-r"><div class="eyline" style="background:var(--red);"></div>Videos</div><div class="sett">Video Library</div></div>
+    <div class="cards c3">
+      <div class="vcard"><div class="vthumb" style="background:#2d4a2d;"><div class="pbtn"><div class="ptri"></div></div><div class="vdur">3:42</div></div><div class="vbody"><div class="vtt">Rasandre Evans — Gold medal kumite, Central Caribbean Cup 2025</div><div class="vmt">Panama · March 2025</div></div></div>
+      <div class="vcard"><div class="vthumb" style="background:#4a3020;"><div class="pbtn"><div class="ptri"></div></div><div class="vdur">4:55</div></div><div class="vbody"><div class="vtt">IKD Caribbean Cup 2016 — Team kata finals, Kingston</div><div class="vmt">Kingston, Jamaica · 2016</div></div></div>
+      <div class="vcard"><div class="vthumb" style="background:#202040;"><div class="pbtn"><div class="ptri"></div></div><div class="vdur">6:10</div></div><div class="vbody"><div class="vtt">Bunkai demonstration — IKD Jamaica training clinic</div><div class="vmt">Jamaica · Training session</div></div></div>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>News</div><div class="sett">Latest from IKD Jamaica</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div class="nbig"><div class="nsrc">Jamaica Gleaner · Apr 2025</div><div class="ntt">Gold and bronze for Jamaica at Central Caribbean Cup in Panama</div><div class="nexc">Rasandre Evans claimed gold in the cadet male kumite 57kg category, defeating competitors from Panama, Puerto Rico and Venezuela. Andrew Evans took bronze in the same event.</div><div style="display:flex;justify-content:space-between;align-items:center;"><div class="nbyl">Jamaica Gleaner · April 6, 2025</div><div class="nlnk">Read more →</div></div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="card" style="cursor:pointer;"><div class="cbody"><div class="cbadge bgr">Organisation</div><div class="ctitle">IKD World Camp 2026 announced — early bird open</div><div class="cmeta">IKD World · February 2026</div></div></div>
+        <div class="card" style="cursor:pointer;"><div class="cbody"><div class="cbadge bgy">Rankings</div><div class="ctitle">Rasandre Evans reaches WKF world ranking #17</div><div class="cmeta">Jamaica Karate · 2025</div></div></div>
+        <div class="card" style="cursor:pointer;"><div class="cbody"><div class="cbadge bg">Promotions</div><div class="ctitle">IKD Shihan-kai announces new Dan promotions for 2025</div><div class="cmeta">IKD World · January 2025</div></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="sec sec-alt">
+    <div class="sech"><div class="seye ey-b"><div class="eyline" style="background:var(--black);"></div>Press coverage</div><div class="sett">IKD Jamaica in the Media</div></div>
+    <div>
+      <div class="pitem"><div class="psrc">Jamaica Gleaner</div><div><div class="ptt2">Gold, bronze for Jamaica at Central Caribbean Cup Karate</div><div class="pdt">April 6, 2025</div></div><div class="plnk">Read →</div></div>
+      <div class="pitem"><div class="psrc">Jamaica Gleaner</div><div><div class="ptt2">Evans brothers headline Jamaica's karate campaign in Panama</div><div class="pdt">March 2025</div></div><div class="plnk">Read →</div></div>
+      <div class="pitem"><div class="psrc">Jamaica Observer</div><div><div class="ptt2">Caribbean Cup comes to Kingston — IKD Jamaica hosts major tournament</div><div class="pdt">July 2016</div></div><div class="plnk">Archive →</div></div>
+      <div class="pitem"><div class="psrc">RJR Sports</div><div><div class="ptt2">Karate Jamaica sends delegation to IKD World Cup in Toronto</div><div class="pdt">July 2012</div></div><div class="plnk">Archive →</div></div>
+    </div>
+  </div>
+  <footer><div><div class="fcoltt">IKD Jamaica</div><span class="flnk" onclick="showPage('home')">Home</span><span class="flnk" onclick="showPage('about')">About</span></div><div><div class="fcoltt">Compete</div><span class="flnk" onclick="showPage('events')">Events</span><span class="flnk" onclick="showPage('results')">Results</span></div><div><div class="fcoltt">Connect</div><span class="flnk" onclick="showPage('membership')">Join</span></div></footer>
+  <div class="fbot"><span class="fcopy">© 2026 IKD Jamaica</span><span class="fcopy">Affiliated with IKD World Honbu Inc., Toronto</span></div>
+</div>
+
+<!-- MEMBERSHIP -->
+<div class="page" id="page-membership">
+  <div class="phero"><div class="pcrumb">Home › <span>Membership & Contact</span></div><h1 class="ptt">Join IKD Jamaica</h1><p class="psub">Become a member of IKD Jamaica and join a global network across 63 countries. All ages and levels welcome.</p><div class="stabs"><div class="stab active">Join IKD Jamaica</div><div class="stab">Membership benefits</div><div class="stab">Fees</div><div class="stab">Contact us</div></div></div>
+  <div class="sec">
+    <div class="sech"><div class="seye ey-r"><div class="eyline" style="background:var(--red);"></div>Membership</div><div class="sett">Join IKD Jamaica</div></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;">
+      <div class="frmbox">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--ink);margin-bottom:18px;">Registration Form</div>
+        <div class="frow"><div class="ffield"><div class="flbl">First name</div><input class="finp" placeholder="e.g. Marcus"></div><div class="ffield"><div class="flbl">Last name</div><input class="finp" placeholder="e.g. Clarke"></div></div>
+        <div class="frow"><div class="ffield"><div class="flbl">Date of birth</div><input class="finp" placeholder="DD/MM/YYYY"></div><div class="ffield"><div class="flbl">Parish</div><select class="finp"><option value="">Select parish</option><option>Kingston</option><option>St. Andrew</option><option>St. Thomas</option><option>Portland</option><option>St. Mary</option><option>St. Ann</option><option>Trelawny</option><option>St. James</option><option>Hanover</option><option>Westmoreland</option><option>St. Elizabeth</option><option>Manchester</option><option>Clarendon</option><option>St. Catherine</option></select></div></div>
+        <div class="frow"><div class="ffield"><div class="flbl">Email address</div><input class="finp" placeholder="your@email.com"></div><div class="ffield"><div class="flbl">Phone number</div><input class="finp" placeholder="+1 876 XXX XXXX"></div></div>
+        <div style="margin-bottom:12px;"><div class="flbl" style="margin-bottom:6px;">Current grade / experience</div><select class="finp"><option>No experience — complete beginner</option><option>White belt (9th Kyu)</option><option>Yellow belt (8th Kyu)</option><option>Orange belt (7th Kyu)</option><option>Green belt (6th–5th Kyu)</option><option>Blue belt (4th–3rd Kyu)</option><option>Brown belt (2nd–1st Kyu)</option><option>Black belt (Dan grade)</option></select></div>
+        <div style="margin-bottom:18px;"><div class="flbl" style="margin-bottom:6px;">Preferred dojo</div><select class="finp"><option>Jamaica Shotokan Karate School, Kingston</option><option>IKD Jamaica — St. Andrew</option><option>IKD Jamaica — St. Catherine</option><option>Not sure yet — help me find one</option></select></div>
+        <button class="btn-r" style="width:100%;padding:12px;font-size:13px;">Submit Application</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="card" style="cursor:default;border-top:3px solid var(--red);"><div class="cbody"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--red);letter-spacing:1px;margin-bottom:10px;">MEMBERSHIP BENEFITS</div><div style="display:flex;flex-direction:column;gap:8px;"><div style="display:flex;gap:10px;font-size:12px;color:var(--muted);"><span style="color:var(--red);flex-shrink:0;">—</span>World IKD membership recognition & ID card</div><div style="display:flex;gap:10px;font-size:12px;color:var(--muted);"><span style="color:var(--gold);flex-shrink:0;">—</span>IKD Passport valid across all 63 countries</div><div style="display:flex;gap:10px;font-size:12px;color:var(--muted);"><span style="color:var(--red);flex-shrink:0;">—</span>Access to national and Caribbean Cup competitions</div><div style="display:flex;gap:10px;font-size:12px;color:var(--muted);"><span style="color:var(--gold);flex-shrink:0;">—</span>IKD World Camp eligibility</div><div style="display:flex;gap:10px;font-size:12px;color:var(--muted);"><span style="color:var(--green);flex-shrink:0;">—</span>IKD Emergency World Travel Support</div></div></div></div>
+        <div class="cbox"><div style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--ink);margin-bottom:12px;">Contact IKD Jamaica</div><div class="crow"><div class="cion">Email</div><div class="cval">ikdjamaica@gmail.com<br><span style="font-size:10px;color:var(--subtle);">We aim to respond within 48 hours</span></div></div><div class="crow"><div class="cion">Facebook</div><div class="cval" style="color:var(--red);font-weight:500;">@IKDJamaica</div></div><div class="crow"><div class="cion">IKD World</div><div class="cval">ikdworld.com</div></div><div class="crow" style="border-bottom:none;"><div class="cion">Honbu HQ</div><div class="cval">IKD Honbu, 2225 Gerrard St. East<br>Toronto, Ontario, Canada M4E 2C8</div></div></div>
+        <button class="btn-out" style="width:100%;" onclick="showPage('training')">Find a dojo first →</button>
+      </div>
+    </div>
+  </div>
+  <footer><div><div class="fcoltt">IKD Jamaica</div><span class="flnk" onclick="showPage('home')">Home</span><span class="flnk" onclick="showPage('about')">About</span><span class="flnk" onclick="showPage('events')">Events</span></div><div><div class="fcoltt">Compete</div><span class="flnk" onclick="showPage('training')">Find a dojo</span><span class="flnk" onclick="showPage('results')">Results</span><span class="flnk" onclick="showPage('media')">Media</span></div><div><div class="fcoltt">Connect</div><span class="flnk">ikdworld.com ↗</span><span class="flnk">IKD Honbu HQ ↗</span></div></footer>
+  <div class="fbot"><span class="fcopy">© 2026 IKD Jamaica</span><span class="fcopy">Affiliated with IKD World Honbu Inc., Toronto, Canada</span></div>
+</div>
+
+</div>
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nlink').forEach(l=>l.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  var n=document.getElementById('nav-'+id);
+  if(n)n.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function updateCD(){
+  var t=new Date('2026-06-18T00:00:00'),d=t-new Date();
+  if(d<=0)return;
+  var dy=Math.floor(d/86400000),hr=Math.floor((d%86400000)/3600000),mn=Math.floor((d%3600000)/60000);
+  ['cd-d','cd-d2'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=dy;});
+  ['cd-h','cd-h2'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=String(hr).padStart(2,'0');});
+  ['cd-m','cd-m2'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=String(mn).padStart(2,'0');});
+}
+updateCD();setInterval(updateCD,30000);showPage('home');
+</script>
+</body>
+</html>
